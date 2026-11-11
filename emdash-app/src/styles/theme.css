@@ -118,7 +118,8 @@ html[data-design="field"] .nav-links {
 	margin-left: auto;
 }
 
-html[data-design="field"] .nav-links a {
+html[data-design="field"] .nav-links a,
+html[data-design="field"] .nav-links .search-trigger {
 	align-items: center;
 	align-self: stretch;
 	border-right: 1px solid var(--color-border);
@@ -132,6 +133,22 @@ html[data-design="field"] .nav-links a {
 	transition:
 		background-color var(--transition-fast),
 		color var(--transition-fast);
+}
+
+html[data-design="field"] .nav-links .search-trigger {
+	background: transparent;
+	border-left: 0;
+	border-top: 0;
+	border-bottom: 0;
+	cursor: pointer;
+	font-family: inherit;
+}
+
+/* The AI search modal host renders as a 320px-wide empty block; keep it out of the nav flow. */
+html[data-design="field"] .nav-links search-modal-snippet {
+	height: 0;
+	position: absolute;
+	width: 0;
 }
 
 html[data-design="field"] .nav-links a::after {
@@ -148,7 +165,9 @@ html[data-design="field"] .nav-links a::after {
 }
 
 html[data-design="field"] .nav-links a:hover,
-html[data-design="field"] .nav-links a:focus-visible {
+html[data-design="field"] .nav-links a:focus-visible,
+html[data-design="field"] .nav-links .search-trigger:hover,
+html[data-design="field"] .nav-links .search-trigger:focus-visible {
 	background: color-mix(in srgb, var(--color-accent) 10%, transparent);
 	color: var(--color-text);
 	outline: 0;
@@ -160,7 +179,9 @@ html[data-design="field"] .nav-links a:focus-visible::after {
 }
 
 html.dark[data-design="field"] .nav-links a:hover,
-html.dark[data-design="field"] .nav-links a:focus-visible {
+html.dark[data-design="field"] .nav-links a:focus-visible,
+html.dark[data-design="field"] .nav-links .search-trigger:hover,
+html.dark[data-design="field"] .nav-links .search-trigger:focus-visible {
 	background: color-mix(in srgb, var(--color-accent) 14%, transparent);
 	color: var(--color-text);
 }
@@ -752,6 +773,34 @@ html[data-design="field"] button {
 	font-weight: 900;
 }
 
+/* Tablet (e.g. iPad portrait): logo on its own row, nav links as a full-width bar beneath. */
+@media (min-width: 641px) and (max-width: 960px) {
+	html[data-design="field"] .nav {
+		flex-wrap: wrap;
+		gap: 0;
+		padding: 0;
+	}
+
+	html[data-design="field"] .site-title {
+		border-left: 0;
+		min-height: 64px;
+	}
+
+	html[data-design="field"] .nav-links {
+		border-left: 0;
+		border-top: 1px solid var(--color-border);
+		flex: 1 0 100%;
+		margin-left: 0;
+		min-height: 52px;
+		overflow-x: auto;
+		padding: 0 var(--spacing-md);
+	}
+
+	html[data-design="field"] .nav-links a:first-child {
+		border-left: 1px solid var(--color-border);
+	}
+}
+
 @media (max-width: 900px) {
 	html[data-design="field"] {
 		--font-size-4xl: 3.35rem;
@@ -792,7 +841,8 @@ html[data-design="field"] button {
 
 	html[data-design="field"] .site-title,
 	html[data-design="field"] .nav-links,
-	html[data-design="field"] .nav-links a {
+	html[data-design="field"] .nav-links a,
+	html[data-design="field"] .nav-links .search-trigger {
 		border: 0;
 		padding: 0;
 	}
